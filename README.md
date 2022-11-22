@@ -10,3 +10,8 @@
 - So through adding the Lookbook section in the customizer you can simply manipulate with product selector directly
 
 ![изображение](https://user-images.githubusercontent.com/49589547/203275212-fdbfbc2f-d115-4cbb-897f-2bd4691ae039.png)
+
+# File Path
+- JS file you can find in assets/lookbook.js
+- liquid file stored in sections/lookbook.liquid
+- CSS file in the same assets/lookbook.css
