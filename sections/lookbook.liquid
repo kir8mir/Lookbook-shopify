@@ -1,0 +1,373 @@
+{{ 'lookbook.css' | asset_url | stylesheet_tag }}
+
+
+
+<div class="lookbook"> 
+  <div id="lookbook-selector" class="lookbook__selector">
+  {%- if settings.look_1_product_1.featured_media -%}
+
+    <a onclick="showProduct('look-1')" class="lookbook_main-img glitch">
+      <img
+        
+        src="{{ settings.lookbook_main-img-1| image_url: width: 400 }}"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+        alt=""
+        class="motion-reduce"
+        loading="lazy"
+        width="{{ card_product.media[1].width }}"
+        height="{{ card_product.media[1].height }}"
+      >
+      <div  id="p-1" class="glitch__layers">
+		<div  id="p-2" class="glitch__layer"></div>
+		<div id="p-2" class="glitch__layer"></div>
+		<div id="p-2" class="glitch__layer"></div>
+	</div>
+    </a>
+
+     <a onclick="showProduct('look-2')" class="lookbook_main-img glitch">
+       <img
+          
+          src="{{ settings.lookbook_main-img-2| image_url: width: 400 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+          alt=""
+          class="motion-reduce"
+          loading="lazy"
+          width="{{ card_product.media[1].width }}"
+          height="{{ card_product.media[1].height }}"
+        >
+    <div id="g-1" class="glitch__layers">
+		<div  id="g-2" class="glitch__layer-1"></div>
+		<div id="g-2" class="glitch__layer-1"></div>
+		<div id="g-2" class="glitch__layer-1"></div>
+	</div>
+     </a>
+
+     <a onclick="showProduct('look-3')" class="lookbook_main-img glitch">
+       <img
+        
+        src="{{ settings.lookbook_main-img-3| image_url: width: 400 }}"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+        alt=""
+        class="motion-reduce"
+        loading="lazy"
+        width="{{ card_product.media[1].width }}"
+        height="{{ card_product.media[1].height }}"
+      >
+
+    <div id="d-1" class="glitch__layers">
+		<div  id="d-2" class="glitch__layer-2"></div>
+		<div id="d-2" class="glitch__layer-2"></div>
+		<div id="d-2" class="glitch__layer-2"></div>
+	</div>
+     </a>
+  {%- endif -%}
+</div>
+
+  <div id="look-1" class="lookbook__products products disable-look">
+    <div class="products__main-img">
+      <a onclick="closeProduct('look-1')" class="products__close-btn"> X </a>
+      <img                  
+        src="{{ settings.lookbook_main-img-1| image_url: width: 533 }}"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+        alt=""
+        class="product__main-img"
+        loading="lazy"
+      >
+    </div>
+  <div class="products__wrapper">
+    <div class="products__product">
+      <div class="products__product-img">
+        <img                 
+          src="{{ settings.look_1_product_1.featured_media | image_url: width: 533 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+          alt=""
+          class="product__img"
+          loading="lazy"
+          width="{{ card_product.media[1].width }}"
+          height="{{ card_product.media[1].height }}"
+        >
+      </div>
+      
+      <div class="products__product-info">
+        <h3> {{ settings.look_1_product_1.title }}</h3>
+        <h4> {{ settings.look_1_product_1.description }}</h4>
+        
+        {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
+        
+        <product-form>
+        {%- form 'product', settings.look_1_product_1, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ settings.look_1_product_1.selected_or_first_available_variant.id }}"
+            disabled
+          >
+          <button
+            id="{{ product_form_id }}-submit"
+            type="submit"
+            name="add"
+            class="quick-add__submit button button--full-width button--secondary"
+            aria-haspopup="dialog"
+            aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
+            aria-live="polite"
+            data-sold-out-message="true"
+            
+          >
+            <span>
+                {{ 'Add To Cart' }}
+            </span>
+            <span class="sold-out-message hidden">
+              {{ 'settings.look_1_product_1.sold_out' | t }}
+            </span>
+            <div class="loading-overlay__spinner hidden">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                role="presentation"
+                class="spinner"
+                viewBox="0 0 66 66"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+          </button>
+        {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+
+    <div class="products__product">
+      <div class="products__product-img">
+        <img                 
+          src="{{ settings.look_1_product_2.featured_media | image_url: width: 533 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+          alt=""
+          class="product__img"
+          loading="lazy"
+          width="{{ card_product.media[1].width }}"
+          height="{{ card_product.media[1].height }}"
+        >
+      </div>
+      
+      <div class="products__product-info">
+        <h3> {{ settings.look_1_product_2.title }}</h3>
+        <h4> {{ settings.look_1_product_2.description }}</h4>
+        
+        {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
+        
+        <product-form>
+        {%- form 'product', settings.look_1_product_2, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ settings.look_1_product_2.selected_or_first_available_variant.id }}"
+            disabled
+          >
+          <button
+            id="{{ product_form_id }}-submit"
+            type="submit"
+            name="add"
+            class="quick-add__submit button button--full-width button--secondary"
+            aria-haspopup="dialog"
+            aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
+            aria-live="polite"
+            data-sold-out-message="true"
+            
+          >
+            <span>
+                {{ 'products.product.add_to_cart' | t }}
+            </span>
+            <span class="sold-out-message hidden">
+              {{ 'products.product.sold_out' | t }}
+            </span>
+            <div class="loading-overlay__spinner hidden">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                role="presentation"
+                class="spinner"
+                viewBox="0 0 66 66"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+          </button>
+        {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+
+      <div id="look-2" class="lookbook__products products disable-look">
+    <div class="products__main-img">
+      <a onclick="closeProduct('look-2')" class="products__close-btn"> X </a>
+      <img                  
+        src="{{ settings.lookbook_main-img-2| image_url: width: 533 }}"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+        alt=""
+        class="product__main-img"
+        loading="lazy"
+      >
+    </div>
+
+    <div class="products__product">
+      <div class="products__product-img">
+        <img                 
+          src="{{ settings.look_2_product_1.featured_media | image_url: width: 533 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+          alt=""
+          class="product__img"
+          loading="lazy"
+          width="{{ card_product.media[1].width }}"
+          height="{{ card_product.media[1].height }}"
+        >
+      </div>
+      
+      <div class="products__product-info">
+        <h3> {{ settings.look_2_product_1.title }}</h3>
+        <h4> {{ settings.look_2_product_1.description }}</h4>
+        
+        {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
+        
+        <product-form>
+        {%- form 'product', settings.look_2_product_1, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ settings.look_2_product_1.selected_or_first_available_variant.id }}"
+            disabled
+          >
+          <button
+            id="{{ product_form_id }}-submit"
+            type="submit"
+            name="add"
+            class="quick-add__submit button button--full-width button--secondary"
+            aria-haspopup="dialog"
+            aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
+            aria-live="polite"
+            data-sold-out-message="true"
+            
+          >
+            <span>
+                {{ 'products.product.add_to_cart' | t }}
+            </span>
+            <span class="sold-out-message hidden">
+              {{ 'products.product.sold_out' | t }}
+            </span>
+            <div class="loading-overlay__spinner hidden">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                role="presentation"
+                class="spinner"
+                viewBox="0 0 66 66"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+          </button>
+        {%- endform -%}
+        </product-form>
+      </div>
+      </div>
+          </div>
+
+      <div id="look-3" class="lookbook__products products disable-look">
+    <div class="products__main-img">
+      <a onclick="closeProduct('look-3')" class="products__close-btn"> X </a>
+      <img                  
+        src="{{ settings.lookbook_main-img-3| image_url: width: 533 }}"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+        alt=""
+        class="product__main-img"
+        loading="lazy"
+      >
+    </div>
+
+    <div class="products__product">
+      <div class="products__product-img">
+        <img                 
+          src="{{ settings.look_3_product_1.featured_media | image_url: width: 533 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+          alt=""
+          class="product__img"
+          loading="lazy"
+          width="{{ card_product.media[1].width }}"
+          height="{{ card_product.media[1].height }}"
+        >
+      </div>
+      
+      <div class="products__product-info">
+        <h3> {{ settings.look_3_product_1.title }}</h3>
+        <h4> {{ settings.look_3_product_1.description }}</h4>
+        
+        {%- assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id -%}
+        
+        <product-form>
+        {%- form 'product', settings.look_3_product_1, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ settings.look_3_product_1.selected_or_first_available_variant.id }}"
+            disabled
+          >
+          <button
+            id="{{ product_form_id }}-submit"
+            type="submit"
+            name="add"
+            class="quick-add__submit button button--full-width button--secondary"
+            aria-haspopup="dialog"
+            aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
+            aria-live="polite"
+            data-sold-out-message="true"
+            
+          >
+            <span>
+                {{ 'products.product.add_to_cart' | t }}
+            </span>
+            <span class="sold-out-message hidden">
+              {{ 'products.product.sold_out' | t }}
+            </span>
+            <div class="loading-overlay__spinner hidden">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                role="presentation"
+                class="spinner"
+                viewBox="0 0 66 66"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+          </button>
+        {%- endform -%}
+        </product-form>
+      </div>
+        </div>
+          </div>
+
+    </div>
+  </div>
+</div> 
+
+{{ 'lookbook.js' | asset_url | script_tag }}
+{{ 'product-form.js' | asset_url | script_tag }}
+
+{% schema %}
+  {
+    "name": "Lookbook",
+    "settings": [],
+    "presets": [
+    {
+      "name": "Lookbook"
+    }
+  ]
+    
+  }
+{% endschema %}
